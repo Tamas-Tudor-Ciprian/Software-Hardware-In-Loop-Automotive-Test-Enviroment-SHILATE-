@@ -1,0 +1,50 @@
+# ============================================================
+# Whitelist .gitignore — ignore everything, allow only essentials
+# ============================================================
+
+# Ignore everything by default
+*
+
+# ---------- Top-level files ----------
+!.gitignore
+!.gitattributes
+
+# ---------- Docs ----------
+!SHILATE-SIM-COMPONENT/docs/
+!SHILATE-SIM-COMPONENT/docs/**
+
+# ---------- Unity project (SHILATE-SIM-COMPONENT) ----------
+!SHILATE-SIM-COMPONENT/
+
+# Allow Assets (scripts, scenes, settings, input config)
+!SHILATE-SIM-COMPONENT/Assets/
+!SHILATE-SIM-COMPONENT/Assets/scripts/
+!SHILATE-SIM-COMPONENT/Assets/scripts/**
+!SHILATE-SIM-COMPONENT/Assets/scripts.meta
+!SHILATE-SIM-COMPONENT/Assets/Scenes/
+!SHILATE-SIM-COMPONENT/Assets/Scenes/**
+!SHILATE-SIM-COMPONENT/Assets/Scenes.meta
+!SHILATE-SIM-COMPONENT/Assets/Settings/
+!SHILATE-SIM-COMPONENT/Assets/Settings/**
+!SHILATE-SIM-COMPONENT/Assets/Settings.meta
+!SHILATE-SIM-COMPONENT/Assets/InputSystem_Actions.inputactions
+!SHILATE-SIM-COMPONENT/Assets/InputSystem_Actions.inputactions.meta
+
+# Allow Packages (dependency manifest)
+!SHILATE-SIM-COMPONENT/Packages/
+!SHILATE-SIM-COMPONENT/Packages/manifest.json
+!SHILATE-SIM-COMPONENT/Packages/packages-lock.json
+
+# Allow ProjectSettings
+!SHILATE-SIM-COMPONENT/ProjectSettings/
+!SHILATE-SIM-COMPONENT/ProjectSettings/**
+
+# ---------- Eclipse Leda ----------
+!leda/
+!leda/*.md
+!leda/*.txt
+!leda/*.sh
+!leda/*.cmd
+!leda/LICENSE
+!leda/examples/
+!leda/examples/**
