@@ -53,7 +53,6 @@ public static class CarBuilder
         cabin.transform.SetParent(car.transform);
         cabin.transform.localPosition = new Vector3(0f, 0.85f, -0.2f);
         cabin.transform.localScale = new Vector3(1.5f, 0.5f, 2.0f);
-        Object.DestroyImmediate(cabin.GetComponent<Collider>());
 
         // ── Wheel dimensions ──
         float wheelRadius = 0.35f;
