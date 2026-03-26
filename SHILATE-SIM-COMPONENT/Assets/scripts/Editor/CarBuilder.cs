@@ -68,10 +68,14 @@ public static class CarBuilder
         WheelCollider wcRL = CreateWheelCollider(car, "WheelCollider_RL", new Vector3(-wheelX, wheelY, wheelRearZ), wheelRadius, suspensionDistance);
         WheelCollider wcRR = CreateWheelCollider(car, "WheelCollider_RR", new Vector3(wheelX, wheelY, wheelRearZ), wheelRadius, suspensionDistance);
 
+        
+
         Transform meshFL = CreateWheelMesh(car, "WheelMesh_FL", new Vector3(-wheelX, wheelY, wheelFrontZ), wheelRadius);
         Transform meshFR = CreateWheelMesh(car, "WheelMesh_FR", new Vector3(wheelX, wheelY, wheelFrontZ), wheelRadius);
         Transform meshRL = CreateWheelMesh(car, "WheelMesh_RL", new Vector3(-wheelX, wheelY, wheelRearZ), wheelRadius);
         Transform meshRR = CreateWheelMesh(car, "WheelMesh_RR", new Vector3(wheelX, wheelY, wheelRearZ), wheelRadius);
+
+  
 
         // ── VehicleController ──
         VehicleController vc = car.AddComponent<VehicleController>();
@@ -159,15 +163,19 @@ public static class CarBuilder
 
     static Transform CreateWheelMesh(GameObject parent, string name, Vector3 localPos, float radius)
     {
+        GameObject pivot = new GameObject(name + "_Pivot");
+        pivot.transform.SetParent(parent.transform);
+        pivot.transform.localPosition = localPos;
+
         GameObject go = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
         go.name = name;
-        go.transform.SetParent(parent.transform);
-        go.transform.localPosition = localPos;
+        go.transform.SetParent(pivot.transform);
+        go.transform.localPosition = Vector3.zero;
         // Cylinder default height=2, radius=0.5 → scale to match wheel radius
         float diameter = radius * 2f;
         go.transform.localScale = new Vector3(diameter, 0.15f, diameter);
         go.transform.localRotation = Quaternion.Euler(0f, 0f, 90f);
         Object.DestroyImmediate(go.GetComponent<Collider>()); // WheelCollider handles physics
-        return go.transform;
+        return pivot.transform;
     }
 }
