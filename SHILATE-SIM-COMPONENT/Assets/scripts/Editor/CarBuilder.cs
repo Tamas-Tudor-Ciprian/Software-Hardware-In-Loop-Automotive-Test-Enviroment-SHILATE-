@@ -34,10 +34,11 @@ public static class CarBuilder
         // This avoids the free-fall → spring explosion on first contact.
         GameObject car = new GameObject("Car");
         car.transform.position = new Vector3(0f, 0.5f, 0f);
-
-        Rigidbody rb = car.AddComponent<Rigidbody>();
+        Rigidbody rb = car.AddComponent<Rigidbody>();    
         rb.mass = 1500f;
         rb.interpolation = RigidbodyInterpolation.Interpolate;
+        rb.inertiaTensor = new Vector3(1000,1000,1000); //this should instruct the wheel coliders to atach to a shape an not explode
+        rb.centerOfMass = new Vector3(0,-0.2f, 0); //low center of mass to prevent flipping
 
         // ── Car Body (visual) ──
         GameObject body = GameObject.CreatePrimitive(PrimitiveType.Cube);
@@ -45,35 +46,51 @@ public static class CarBuilder
         body.transform.SetParent(car.transform);
         body.transform.localPosition = new Vector3(0f, 0.35f, 0f);
         body.transform.localScale = new Vector3(1.8f, 0.6f, 4.2f);
-        Object.DestroyImmediate(body.GetComponent<Collider>()); // physics handled by WheelColliders
+        body.GetComponent<Renderer>().material = new Material(Shader.Find("Universal Render Pipeline/Lit")){color = Color.green};
+       // Object.DestroyImmediate(body.GetComponent<Collider>()); // physics handled by WheelColliders
 
-        // Cabin (upper box)
+        //here I will create a parent for the visual wheels
+
+        GameObject visualWheelsParent = new GameObject("VisualWheels");
+        visualWheelsParent.transform.SetParent(car.transform);
+        visualWheelsParent.transform.localPosition = Vector3.zero;
+
+        //here I will create a parent for the physics wheels
+
+        GameObject physicsWheelsParent = new GameObject("PhysicsWheels");
+        physicsWheelsParent.transform.SetParent(car.transform);
+        physicsWheelsParent.transform.localPosition = Vector3.zero;
+
+        // Cabin (upper box) 
+             
         GameObject cabin = GameObject.CreatePrimitive(PrimitiveType.Cube);
         cabin.name = "Cabin";
         cabin.transform.SetParent(car.transform);
         cabin.transform.localPosition = new Vector3(0f, 0.85f, -0.2f);
         cabin.transform.localScale = new Vector3(1.5f, 0.5f, 2.0f);
+        Object.DestroyImmediate(cabin.GetComponent<Collider>());
 
+        
         // ── Wheel dimensions ──
         float wheelRadius = 0.35f;
         float suspensionDistance = 0.2f;
-        float wheelX = 0.85f;
+        float wheelX = 1.0f;
         float wheelFrontZ = 1.3f;
         float wheelRearZ = -1.3f;
         float wheelY = 0f; // relative to car root (WheelCollider handles suspension)
 
         // ── Create WheelColliders + Visual Wheels ──
-        WheelCollider wcFL = CreateWheelCollider(car, "WheelCollider_FL", new Vector3(-wheelX, wheelY, wheelFrontZ), wheelRadius, suspensionDistance);
-        WheelCollider wcFR = CreateWheelCollider(car, "WheelCollider_FR", new Vector3(wheelX, wheelY, wheelFrontZ), wheelRadius, suspensionDistance);
-        WheelCollider wcRL = CreateWheelCollider(car, "WheelCollider_RL", new Vector3(-wheelX, wheelY, wheelRearZ), wheelRadius, suspensionDistance);
-        WheelCollider wcRR = CreateWheelCollider(car, "WheelCollider_RR", new Vector3(wheelX, wheelY, wheelRearZ), wheelRadius, suspensionDistance);
+        WheelCollider wcFL = CreateWheelCollider(physicsWheelsParent, "WheelCollider_FL", new Vector3(-wheelX, wheelY, wheelFrontZ), wheelRadius, suspensionDistance);
+        WheelCollider wcFR = CreateWheelCollider(physicsWheelsParent, "WheelCollider_FR", new Vector3(wheelX, wheelY, wheelFrontZ), wheelRadius, suspensionDistance);
+        WheelCollider wcRL = CreateWheelCollider(physicsWheelsParent, "WheelCollider_RL", new Vector3(-wheelX, wheelY, wheelRearZ), wheelRadius, suspensionDistance);
+        WheelCollider wcRR = CreateWheelCollider(physicsWheelsParent, "WheelCollider_RR", new Vector3(wheelX, wheelY, wheelRearZ), wheelRadius, suspensionDistance);
 
         
 
-        Transform meshFL = CreateWheelMesh(car, "WheelMesh_FL", new Vector3(-wheelX, wheelY, wheelFrontZ), wheelRadius);
-        Transform meshFR = CreateWheelMesh(car, "WheelMesh_FR", new Vector3(wheelX, wheelY, wheelFrontZ), wheelRadius);
-        Transform meshRL = CreateWheelMesh(car, "WheelMesh_RL", new Vector3(-wheelX, wheelY, wheelRearZ), wheelRadius);
-        Transform meshRR = CreateWheelMesh(car, "WheelMesh_RR", new Vector3(wheelX, wheelY, wheelRearZ), wheelRadius);
+        Transform meshFL = CreateWheelMesh(visualWheelsParent, "WheelMesh_FL", new Vector3(-wheelX, wheelY, wheelFrontZ), wheelRadius);
+        Transform meshFR = CreateWheelMesh(visualWheelsParent, "WheelMesh_FR", new Vector3(wheelX, wheelY, wheelFrontZ), wheelRadius);
+        Transform meshRL = CreateWheelMesh(visualWheelsParent, "WheelMesh_RL", new Vector3(-wheelX, wheelY, wheelRearZ), wheelRadius);
+        Transform meshRR = CreateWheelMesh(visualWheelsParent, "WheelMesh_RR", new Vector3(wheelX, wheelY, wheelRearZ), wheelRadius);
 
   
 
@@ -176,6 +193,7 @@ public static class CarBuilder
         go.transform.localScale = new Vector3(diameter, 0.15f, diameter);
         go.transform.localRotation = Quaternion.Euler(0f, 0f, 90f);
         Object.DestroyImmediate(go.GetComponent<Collider>()); // WheelCollider handles physics
+        go.GetComponent<Renderer>().material = new Material(Shader.Find("Universal Render Pipeline/Lit")){color = Color.brown}; //this should color the wheel
         return pivot.transform;
     }
 }

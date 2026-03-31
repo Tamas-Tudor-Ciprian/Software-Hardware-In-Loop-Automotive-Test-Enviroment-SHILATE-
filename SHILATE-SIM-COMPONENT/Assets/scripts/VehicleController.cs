@@ -133,8 +133,8 @@ public class VehicleController : MonoBehaviour
     {
         if (collider == null || mesh == null) return;
         collider.GetWorldPose(out Vector3 pos, out Quaternion rot);
-        mesh.parent.position = pos;
-        mesh.parent.rotation = rot;
+        mesh.position = pos;
+        mesh.rotation = rot;
     }
 
     /// <summary>Reset all inputs to zero (stop the car).</summary>
