@@ -1,0 +1,29 @@
+{
+  "container_name": "shilate-velocitas-app",
+  "image": {
+    "name": "ghcr.io/siemens/shilate-velocitas-app:latest"
+  },
+  "host_config": {
+    "network_mode": "host",
+    "restart_policy": {
+      "type": "unless-stopped"
+    },
+    "log_config": {
+      "driver_config": {
+        "type": "json-file",
+        "max_files": 3,
+        "max_size": "5M"
+      }
+    }
+  },
+  "config": {
+    "env": [
+      "KUKSA_HOST=127.0.0.1",
+      "KUKSA_PORT=55555",
+      "MQTT_HOST=localhost",
+      "MQTT_PORT=1883",
+      "SPEED_LIMIT=120",
+      "RPM_REDLINE=6500"
+    ]
+  }
+}

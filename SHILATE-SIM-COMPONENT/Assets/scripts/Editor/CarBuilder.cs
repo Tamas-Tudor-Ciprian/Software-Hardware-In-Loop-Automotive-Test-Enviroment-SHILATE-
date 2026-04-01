@@ -69,7 +69,7 @@ public static class CarBuilder
         cabin.transform.localPosition = new Vector3(0f, 0.85f, -0.2f);
         cabin.transform.localScale = new Vector3(1.5f, 0.5f, 2.0f);
         Object.DestroyImmediate(cabin.GetComponent<Collider>());
-
+        cabin.GetComponent<Renderer>().material = new Material(Shader.Find("Universal Render Pipeline/Lit")){color = new Color(0.2f, 0.8f, 0.1f)}; //this should color the wheel
         
         // ── Wheel dimensions ──
         float wheelRadius = 0.35f;

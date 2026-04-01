@@ -48,3 +48,11 @@
 !leda/LICENSE
 !leda/examples/
 !leda/examples/**
+
+# MQTT→KUKSA Feeder
+!leda/mqtt-kuksa-feeder/
+!leda/mqtt-kuksa-feeder/**
+
+# Velocitas Vehicle App
+!leda/velocitas-app/
+!leda/velocitas-app/**

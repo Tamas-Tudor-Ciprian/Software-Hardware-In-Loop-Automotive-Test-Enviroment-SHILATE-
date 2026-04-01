@@ -1,0 +1,39 @@
+{
+  "mqtt": {
+    "host": "localhost",
+    "port": 1883,
+    "client_id": "mqtt-kuksa-feeder",
+    "topic_root": "vehicle/#"
+  },
+  "kuksa": {
+    "host": "127.0.0.1",
+    "port": 55555
+  },
+  "mappings": [
+    {
+      "mqtt_topic": "vehicle/speed",
+      "vss_path": "Vehicle.Speed",
+      "description": "Vehicle speed in km/h"
+    },
+    {
+      "mqtt_topic": "vehicle/rpm",
+      "vss_path": "Vehicle.Powertrain.CombustionEngine.Speed",
+      "description": "Engine RPM"
+    },
+    {
+      "mqtt_topic": "vehicle/steering",
+      "vss_path": "Vehicle.Chassis.SteeringWheel.Angle",
+      "description": "Steering wheel angle in degrees"
+    },
+    {
+      "mqtt_topic": "vehicle/brake",
+      "vss_path": "Vehicle.Chassis.Brake.PedalPosition",
+      "description": "Brake pedal position 0-100%"
+    },
+    {
+      "mqtt_topic": "vehicle/throttle",
+      "vss_path": "Vehicle.Powertrain.CombustionEngine.Throttle",
+      "description": "Throttle position 0-100%"
+    }
+  ]
+}

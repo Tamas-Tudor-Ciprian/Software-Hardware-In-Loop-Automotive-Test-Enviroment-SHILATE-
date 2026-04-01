@@ -1,12 +1,91 @@
 # Changelog
 
-## [Unreleased](https://github.com/eclipse-leda/leda-distro/tree/HEAD)
+## [v0.1.0-M3](https://github.com/eclipse-leda/leda-distro/tree/v0.1.0-M3) (2023-11-20)
 
-[Full Changelog](https://github.com/eclipse-leda/leda-distro/compare/v0.1.0-M1...HEAD)
+[Full Changelog](https://github.com/eclipse-leda/leda-distro/compare/v0.1.0-M2...v0.1.0-M3)
+
+**Implemented enhancements:**
+
+- Support for WasmEdge WebAssembly [\#147](https://github.com/eclipse-leda/leda-distro/issues/147)
+- Default hostname should be device specific [\#126](https://github.com/eclipse-leda/leda-distro/issues/126)
+- Document installation on Debian, Ubuntu, RasperryPi OS [\#117](https://github.com/eclipse-leda/leda-distro/issues/117)
+- Container with Framebuffer overlay for Leda / SDV / VSS events [\#80](https://github.com/eclipse-leda/leda-distro/issues/80)
+- Include a larger subset of the python 3.10 standard library in sdv-image-full [\#69](https://github.com/eclipse-leda/leda-distro/issues/69)
+- Preinstall COVESA VSS and Tooling [\#66](https://github.com/eclipse-leda/leda-distro/issues/66)
+- Recipe to build self-update-agent as yocto-oci-container [\#37](https://github.com/eclipse-leda/leda-distro/issues/37)
+- Documentation for desired state deployment [\#31](https://github.com/eclipse-leda/leda-distro/issues/31)
+- Integrate Eclipse Kuksa.VAL - GPS Feeder [\#20](https://github.com/eclipse-leda/leda-distro/issues/20)
+
+**Fixed bugs:**
+
+- Cloud connector stopped working [\#158](https://github.com/eclipse-leda/leda-distro/issues/158)
+- No WiFi on raspberry4 [\#105](https://github.com/eclipse-leda/leda-distro/issues/105)
+- Seat Service Example with CAN-Bus missing candump and incorrect container descriptor [\#78](https://github.com/eclipse-leda/leda-distro/issues/78)
+- sdv-motd is confused by wlan interfaces [\#71](https://github.com/eclipse-leda/leda-distro/issues/71)
+- RAUC can not install in stream-mode on Raspberry Pi [\#64](https://github.com/eclipse-leda/leda-distro/issues/64)
+- growdisk on RPi4 with sfdisk instead of parted \(signaling kernel\) [\#59](https://github.com/eclipse-leda/leda-distro/issues/59)
+- `sdv-provision` produces an empty  `Device ID` [\#56](https://github.com/eclipse-leda/leda-distro/issues/56)
+- Missing/Outdated Kuksa databroker-cli [\#34](https://github.com/eclipse-leda/leda-distro/issues/34)
+
+**Closed issues:**
+
+- How to connect Leda on Raspberry Pi to wifi-network [\#155](https://github.com/eclipse-leda/leda-distro/issues/155)
+- \[ISSUE\] The latest cannot work on Leda v0.1.0-M1 based on QEMU X86\_64. [\#146](https://github.com/eclipse-leda/leda-distro/issues/146)
+- Tools for serial ports as container [\#128](https://github.com/eclipse-leda/leda-distro/issues/128)
+- Kanto cm containers not found in sdv-health [\#99](https://github.com/eclipse-leda/leda-distro/issues/99)
 
 **Merged pull requests:**
 
+- Add workspace cleanup to build.yml [\#163](https://github.com/eclipse-leda/leda-distro/pull/163)
+- Update requirements for container metrics container due to CVE-2023-46136 found by OCAAS scan [\#161](https://github.com/eclipse-leda/leda-distro/pull/161)
+- Cloud connector is disabled [\#160](https://github.com/eclipse-leda/leda-distro/pull/160)
+- Wasmedge [\#157](https://github.com/eclipse-leda/leda-distro/pull/157)
+- Add an owner check for release workflows to avoid running it on forks [\#153](https://github.com/eclipse-leda/leda-distro/pull/153)
+- Add the self-hosted label to build.yml [\#152](https://github.com/eclipse-leda/leda-distro/pull/152)
+- Update post-attach.sh [\#150](https://github.com/eclipse-leda/leda-distro/pull/150)
+- Wrong IF param in post-attach.sh [\#149](https://github.com/eclipse-leda/leda-distro/pull/149)
+- Fix workspace ownership in codespaces [\#148](https://github.com/eclipse-leda/leda-distro/pull/148)
+- Add KAD Lock for the MQTT listener [\#145](https://github.com/eclipse-leda/leda-distro/pull/145)
+- Blueprint selector [\#144](https://github.com/eclipse-leda/leda-distro/pull/144)
+- Removing unneded workflow files [\#143](https://github.com/eclipse-leda/leda-distro/pull/143)
+- UM using desired state to CUA and SUA [\#142](https://github.com/eclipse-leda/leda-distro/pull/142)
+- Update manager robot test [\#140](https://github.com/eclipse-leda/leda-distro/pull/140)
+- Fix general release workflow issues [\#139](https://github.com/eclipse-leda/leda-distro/pull/139)
+- Remove a4f from ort scan [\#138](https://github.com/eclipse-leda/leda-distro/pull/138)
+- Initial setup for RHIVOS [\#137](https://github.com/eclipse-leda/leda-distro/pull/137)
+- FIX RAUC Certificate Paths [\#135](https://github.com/eclipse-leda/leda-distro/pull/135)
+- Https port [\#134](https://github.com/eclipse-leda/leda-distro/pull/134)
+- Obsolete files [\#133](https://github.com/eclipse-leda/leda-distro/pull/133)
+- SUA over https download [\#132](https://github.com/eclipse-leda/leda-distro/pull/132)
+- Removed cve-check [\#131](https://github.com/eclipse-leda/leda-distro/pull/131)
+- SUA robot  build-177 [\#130](https://github.com/eclipse-leda/leda-distro/pull/130)
+- Fix for robot test on SUA [\#125](https://github.com/eclipse-leda/leda-distro/pull/125)
+- Fix workflow spdx [\#124](https://github.com/eclipse-leda/leda-distro/pull/124)
+- Add meta-lts-mixins to .gitignore [\#123](https://github.com/eclipse-leda/leda-distro/pull/123)
+- Robot SUA test update [\#122](https://github.com/eclipse-leda/leda-distro/pull/122)
+- Robot changes for SUA Fine-Grained API [\#121](https://github.com/eclipse-leda/leda-distro/pull/121)
+- Debian distro tests [\#120](https://github.com/eclipse-leda/leda-distro/pull/120)
+- Added meta-lts-mixins [\#118](https://github.com/eclipse-leda/leda-distro/pull/118)
+- OSS Compliance tooling [\#115](https://github.com/eclipse-leda/leda-distro/pull/115)
+- Leda for Ti Jacinto 7 example kas config [\#109](https://github.com/eclipse-leda/leda-distro/pull/109)
+- Update config to include meta-leda-backports layer [\#108](https://github.com/eclipse-leda/leda-distro/pull/108)
+- SBOM conversion from SPDX to CycloneDX for self-hosted builds [\#104](https://github.com/eclipse-leda/leda-distro/pull/104)
+- Updating OCAAS .ort.yml [\#102](https://github.com/eclipse-leda/leda-distro/pull/102)
+- Fix ORT findings [\#96](https://github.com/eclipse-leda/leda-distro/pull/96)
+- Fix filenames [\#95](https://github.com/eclipse-leda/leda-distro/pull/95)
+- Release attach sboms [\#93](https://github.com/eclipse-leda/leda-distro/pull/93)
+- KAS Config TI Jacinto Arago [\#85](https://github.com/eclipse-leda/leda-distro/pull/85)
+- Unshallow git repo before reading tags [\#84](https://github.com/eclipse-leda/leda-distro/pull/84)
+- Merge pull request \#5 from eclipse-leda/main [\#72](https://github.com/eclipse-leda/leda-distro/pull/72)
 - Dockerized VSS vspec2json tool [\#67](https://github.com/eclipse-leda/leda-distro/pull/67)
+
+## [v0.1.0-M2](https://github.com/eclipse-leda/leda-distro/tree/v0.1.0-M2) (2023-05-03)
+
+[Full Changelog](https://github.com/eclipse-leda/leda-distro/compare/v0.1.0-M1...v0.1.0-M2)
+
+**Fixed bugs:**
+
+- Home/End key navigation does not work with putty [\#18](https://github.com/eclipse-leda/leda-distro/issues/18)
 
 ## [v0.1.0-M1](https://github.com/eclipse-leda/leda-distro/tree/v0.1.0-M1) (2023-04-11)
 

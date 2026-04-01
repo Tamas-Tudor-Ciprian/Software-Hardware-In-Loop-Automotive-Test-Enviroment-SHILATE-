@@ -60,6 +60,56 @@ Running BitBake to build your own images requires some extra setup on the build 
 If you want to contribute bug reports or feature requests, please use *GitHub Issues*.
 For reporting security vulnerabilities, please follow our [security guideline](https://eclipse-leda.github.io/leda/docs/project-info/security/).
 
+# SHILATE Integration
+
+The SHILATE project extends this Leda instance with a Unity-based vehicle simulation
+that publishes real-time telemetry via MQTT, bridged into KUKSA.val Databroker.
+
+## Architecture
+
+```
+Unity Simulation (Windows)
+  └─ LedaBroker publishes → MQTT (localhost:1883)
+       └─ mqtt-kuksa-feeder subscribes vehicle/# → writes to KUKSA Databroker (gRPC :55555)
+            └─ Velocitas Vehicle App subscribes to VSS signals → business logic + alerts
+                 └─ Publishes alerts back to MQTT (leda/command/alert) → Unity receives
+```
+
+## Components
+
+| Directory | Description |
+|-----------|-------------|
+| `mqtt-kuksa-feeder/` | Python service bridging MQTT topics to KUKSA VSS paths |
+| `velocitas-app/` | Velocitas Python vehicle app with speed/RPM monitoring |
+| `deploy.sh` | One-command build and deploy script for both containers |
+
+## Quick Deploy
+
+```bash
+# Deploy both feeder and Velocitas app to the running Leda instance
+./deploy.sh all
+
+# Or deploy individually
+./deploy.sh feeder
+./deploy.sh app
+```
+
+## Verify
+
+```bash
+# Check containers are running
+ssh -p 2222 root@localhost "kanto-cm list"
+
+# Check feeder logs
+ssh -p 2222 root@localhost "kanto-cm logs --name mqtt-kuksa-feeder"
+
+# Check app logs
+ssh -p 2222 root@localhost "kanto-cm logs --name shilate-velocitas-app"
+
+# Query KUKSA Databroker for live vehicle speed
+ssh -p 2222 root@localhost "databroker-cli" <<< "get Vehicle.Speed"
+```
+
 # License and Copyright
 
 This program and the accompanying materials are made available under the
